@@ -1,9 +1,9 @@
--- Issues:
--- I'm still working on Tracers, I know they can cause huge frame rate drops. (I think I got it running as smooth as it's going to get.)
+-- Проблемы:
+-- Я все еще работаю над трассерами, я знаю, что они могут вызвать сильное падение частоты кадров. (Думаю, у меня все прошло гладко, насколько это возможно.)
 -- Phantom Forces: Weird positioning bug with tracers? Tracer positions a bit behind localplayer. (Maybe make the update faster? > RenderPriority.First ?
 
--- Settings can be found on line: 51
--- Don't change anything if you don't understand.
+-- Настройки можно найти в строке: 51
+-- Ничего не меняй если ничего не понимаешь
 
 local Plrs = game:GetService("Players")
 local Run = game:GetService("RunService")
@@ -20,18 +20,18 @@ function GetCamera() -- Just in case some game renames the player's camera.
 end
  
 local ChamsFolder = Instance.new("Folder", CoreGui)
-ChamsFolder.Name = "Chams"
+ChamsFolder.Name = "Чамсы"
 local PlayerChams = Instance.new("Folder", ChamsFolder)
-PlayerChams.Name = "PlayerChams"
+PlayerChams.Name = "Чамсы Игроков"
 local ItemChams = Instance.new("Folder", ChamsFolder)
-ItemChams.Name = "ItemChams"
+ItemChams.Name = "Чамсы Предметов"
 
 local ESPFolder = Instance.new("Folder", CoreGui)
-ESPFolder.Name = "ESP Stuff"
+ESPFolder.Name = "ESP Стафф"
 local PlayerESP = Instance.new("Folder", ESPFolder)
-PlayerESP.Name = "PlayerESP"
+PlayerESP.Name = "ESP Инроков"
 local ItemESP = Instance.new("Folder", ESPFolder)
-ItemESP.Name = "ItemESP"
+ItemESP.Name = "ESP Предметов"
 
 local MyPlr = Plrs.LocalPlayer
 local MyChar = MyPlr.Character
@@ -43,7 +43,7 @@ if MyCam == nil then
 end
 
 local Tracers = Instance.new("Folder", MyCam)
-Tracers.Name = "Tracers"
+Tracers.Name = "Трейсеры"
 local TracerData = { }
 local TracerMT = setmetatable(TracerData, {
 	__newindex = function(tab, index, val)
@@ -164,7 +164,7 @@ fuck = pcall(function()
 		spawn(function()
 			SaveBullshitSettings()
 			local hint = Instance.new("Hint", CoreGui)
-			hint.Text = "Major update requried your settings to be wiped! Sorry!"
+			hint.Text = "Большое обновление потребовало стирания ваших настроек! Сожалею!"
 			wait(5)
 			hint:Destroy()
 		end)
@@ -184,9 +184,9 @@ end)
 
 local DebugMenu = { }
 DebugMenu["SC"] = Instance.new("ScreenGui", CoreGui)
-DebugMenu["SC"].Name = "Debug"
+DebugMenu["SC"].Name = "Де-Баг"
 DebugMenu["Main"] = Instance.new("Frame", DebugMenu["SC"])
-DebugMenu["Main"].Name = "Debug Menu"
+DebugMenu["Main"].Name = "Де-Баг Меню"
 DebugMenu["Main"].Position = UDim2.new(0, 20, 1, -220)
 DebugMenu["Main"].Size = UDim2.new(1, 0, 0, 200)
 DebugMenu["Main"].BackgroundTransparency = 1
@@ -304,25 +304,25 @@ function GetTeamColor(Plr)
 				if not Bullshit.FreeForAll then
 					if MyPlr.Team ~= nil and Plr.Team ~= nil then
 						if Bullshit.FriendList[Plr.Name] == nil then
-							if MyPlr.Team.Name == "Prisoner" then
-								if Plr.Team == MyPlr.Team or Plr.Team.Name == "Criminal" then
+							if MyPlr.Team.Name == "Заключённый" then
+								if Plr.Team == MyPlr.Team or Plr.Team.Name == "Криминал" then
 									PickedColor = Bullshit.Colors.Ally
 								else
 									PickedColor = Bullshit.Colors.Enemy
 								end
-							elseif MyPlr.Team.Name == "Criminal" then
-								if Plr.Team == MyPlr.Team or Plr.Team.Name == "Prisoner" then
+							elseif MyPlr.Team.Name == "Криминал" then
+								if Plr.Team == MyPlr.Team or Plr.Team.Name == "Заключённый" then
 									PickedColor = Bullshit.Colors.Ally
 								else
 									PickedColor = Bullshit.Colors.Enemy
 								end
-							elseif MyPlr.Team.Name == "Police" then
+							elseif MyPlr.Team.Name == "Полиция" then
 								if Plr.Team == MyPlr.Team then
 									PickedColor = Bullshit.Colors.Ally
 								else
-									if Plr.Team.Name == "Criminal" then
+									if Plr.Team.Name == "Криминал" then
 										PickedColor = Bullshit.Colors.Enemy
-									elseif Plr.Team.Name == "Prisoner" then
+									elseif Plr.Team.Name == "Заключённый" then
 										PickedColor = Bullshit.Colors.Neutral
 									end
 								end
@@ -348,23 +348,23 @@ function GetTeamColor(Plr)
 						if MyPlr.Team.Name == "Inmates" then
 							if Plr.Team.Name == "Inmates" then
 								PickedColor = Bullshit.Colors.Ally
-							elseif Plr.Team.Name == "Guards" or Plr.Team.Name == "Criminals" then
+							elseif Plr.Team.Name == "Guards" or Plr.Team.Name == "Криминалы" then
 								PickedColor = Bullshit.Colors.Enemy
 							else
 								PickedColor = Bullshit.Colors.Neutral
 							end
-						elseif MyPlr.Team.Name == "Guards" then
-							if Plr.Team.Name == "Inmates" then
+						elseif MyPlr.Team.Name == "Охранники" then
+							if Plr.Team.Name == "заключенные" then
 								PickedColor = Bullshit.Colors.Neutral
-							elseif Plr.Team.Name == "Criminals" then
+							elseif Plr.Team.Name == "Криминалы" then
 								PickedColor = Bullshit.Colors.Enemy
-							elseif Plr.Team.Name == "Guards" then
+							elseif Plr.Team.Name == "Охранники" then
 								PickColor = Bullshit.Colors.Ally
 							end
-						elseif MyPlr.Team.Name == "Criminals" then
-							if Plr.Team.Name == "Inmates" then
+						elseif MyPlr.Team.Name == "Криминалы" then
+							if Plr.Team.Name == "заключённые" then
 								PickedColor = Bullshit.Colors.Ally
-							elseif Plr.Team.Name == "Guards" then
+							elseif Plr.Team.Name == "Охранники" then
 								PickedColor = Bullshit.Colors.Enemy
 							else
 								PickedColor = Bullshit.Colors.Neutral
@@ -554,7 +554,7 @@ end
 
 function FindCham(Obj)
 	for i, v in next, ItemChams:GetChildren() do
-		if v.className == "ObjectValue" then
+		if v.className == "Обьекктное значение" then
 			if v.Value == Obj then
 				return v.Parent
 			end
@@ -566,7 +566,7 @@ end
 
 function FindESP(Obj)
 	for i, v in next, ItemESP:GetChildren() do
-		if v.className == "ObjectValue" then
+		if v.className == "Объектное значение" then
 			if v.Value == Obj then
 				return v.Parent
 			end
